@@ -1,0 +1,28 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Or.hdl
+
+/**
+ * Or gate. out = a or b
+ */
+
+/**
+ * x + y = not( not(x) not(y))
+ */
+
+CHIP Or {
+
+    IN  a, b;
+    OUT out;
+
+    PARTS:
+    // Nand(a=a, b=a, out=left);
+    // Nand(a=b, b=b, out=right);
+    // Nand(a=left, b=right, out=out);
+
+    Not(in=a, out=nota);
+    Not(in=b, out=notb);
+    And(a=nota, b=notb, out=neitheranorb);
+    Not(in=neitheranorb, out=out);
+}
