@@ -1,0 +1,7 @@
+CHIP IsNegative16 {
+    IN  in[16];
+    OUT out;
+
+    PARTS:
+    EQ(a=in[15], b=true, out=out);
+}

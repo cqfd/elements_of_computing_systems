@@ -1,0 +1,12 @@
+CHIP ZN {
+    IN  in[16], z, n;
+    OUT out[16];
+
+    PARTS:
+    // first decide whether to zero input
+    Mux16(a=in, b=false, sel=z, out=zout);
+
+    // then decide whether to negate possibly zeroed input
+    Not16(in=zout, out=notzout);
+    Mux16(a=zout, b=notzout, sel=n, out=out);
+}

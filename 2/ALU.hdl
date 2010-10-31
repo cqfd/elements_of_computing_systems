@@ -41,5 +41,17 @@ CHIP ALU {
         ng; // 1 if out<0, 0 otherwise
 
     PARTS:
-    // Implementation missing.
+
+    ZN(in=x, z=zx, n=nx, out=znx);
+    ZN(in=y, z=zy, n=ny, out=zny);
+
+    F(x=znx, y=zny, f=f, out=fout);
+
+    Not16(in=fout, out=notfout);
+    Mux16(a=fout, b=notfout, sel=no, out=out, out=output);
+
+    // zr and ng implementation
+
+    EQ16(a=output, b=false, out=zr);
+    IsNegative16(in=output, out=ng);
 }

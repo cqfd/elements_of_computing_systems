@@ -1,0 +1,11 @@
+CHIP EQ {
+    IN  a, b;
+    OUT out;
+
+    PARTS:
+    And(a=a, b=b, out=aandb);
+    Not(in=a, out=nota);
+    Not(in=b, out=notb);
+    And(a=nota, b=notb, out=notaandnotb);
+    Or(a=aandb, b=notaandnotb, out=out);
+}

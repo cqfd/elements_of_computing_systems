@@ -1,0 +1,9 @@
+CHIP EQ4{
+    IN  a[4], b[4];
+    OUT out;
+
+    PARTS:
+    EQ2(a=a[0..1], b=b[0..1], out=out01);
+    EQ2(a=a[2..3], b=b[2..3], out=out23);
+    And(a=out01, b=out23, out=out);
+}
