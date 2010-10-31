@@ -6,6 +6,10 @@
 /**
  * Full adder. Computes sum, the least significant bit of 
  * a + b + c, and carry, the most significant bit of a + b + c.
+ * 
+ * The LSB of a + b +c = LSB(a + b) + c
+ * The MSB of a + b + c = MSB(a + b), MSB can never be more than 1
+ * given that max sum is 1 + 1 + 1 = 11
  */
 
 CHIP FullAdder {
@@ -15,6 +19,8 @@ CHIP FullAdder {
         carry;   // MSB of a + b + c
 
     PARTS:
-    // Implementation missing.
+    HalfAdder(a=a, b=b, sum=absum, carry=abcarry);
+    HalfAdder(a=absum, b=c, sum=sum, carry=abccarry);
+    Xor(a=abcarry, b=abccarry, out=carry);
 }
 

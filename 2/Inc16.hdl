@@ -6,6 +6,8 @@
 /**
  * 16-bit incrementer.  out = in + 1 (16-bit addition).
  * Overflow is neither detected nor handled.
+ *
+ * Note that setting b=true sets b -> 111...11 = -1
  */
 
 CHIP Inc16 {
@@ -14,6 +16,6 @@ CHIP Inc16 {
     OUT out[16];
 
     PARTS:
-    // Implementation missing.
+    Add16(a=in, b[0]=true, out=out);
 }
 
