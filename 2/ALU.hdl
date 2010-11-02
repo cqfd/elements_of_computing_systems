@@ -42,16 +42,19 @@ CHIP ALU {
 
     PARTS:
 
+    // zero and/or negate inputs if appropriate flags are set
     ZN(in=x, z=zx, n=nx, out=znx);
     ZN(in=y, z=zy, n=ny, out=zny);
 
+    // F simply computes x + y (if f = 1) or x & y (if f = 0)
     F(x=znx, y=zny, f=f, out=fout);
 
+    // If the no flag is set, negate the output from F
+    // Pipe (possibly negated) output to 'output' so we can set zr and ng flags
     Not16(in=fout, out=notfout);
     Mux16(a=fout, b=notfout, sel=no, out=out, out=output);
 
     // zr and ng implementation
-
     EQ16(a=output, b=false, out=zr);
     IsNegative16(in=output, out=ng);
 }
